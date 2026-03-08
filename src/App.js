@@ -7,7 +7,7 @@ import emailjs from '@emailjs/browser';
 import { emailConfig } from './config/emailConfig';
 
 
-const SECTION_IDS = ['home', 'resume', 'certification', 'experience', 'projects', 'about', 'contact'];
+const SECTION_IDS = ['home', 'resume', 'certifications', 'experiences', 'projects', 'about', 'contact'];
 
 const HERO_SLIDES = [
   {

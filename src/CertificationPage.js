@@ -2,10 +2,10 @@ import React from 'react';
 import Header from './Header';
 
 const CERTIFICATES = [
-  { name: 'CSWA Certificate', file: 'CSWA Certificate_C-59Y3TZXS87.pdf' },
-  { name: 'CSWP', file: 'CSWP_C-TPBN35J7ES.pdf' },
-  { name: 'CSWA-AM', file: 'CSWA-AM_C-9LAZJX6UQ8.pdf' },
-  { name: 'CSWPA_DT', file: 'CSWPA_DT_C-Q4F3D5XKLW.pdf' },
+  { name: 'CSWA Certificate', file: 'CSWA Certificate_C-59Y3TZXS87.pdf', link :'https://www.credly.com/badges/f633532f-aec1-4c24-81ad-3c08d82d77c1/public_url' },
+  { name: 'CSWP', file: 'CSWP_C-TPBN35J7ES.pdf',link :'https://www.credly.com/badges/e2b42659-2c4b-42a8-ae57-15f1d724aa37/public_url' },
+  { name: 'CSWA-AM', file: 'CSWA-AM_C-9LAZJX6UQ8.pdf', link: 'https://www.credly.com/badges/98a8a9b6-e6c4-405d-9be6-56f44d546b0d/public_url' },
+  { name: 'CSWPA_DT', file: 'CSWPA_DT_C-Q4F3D5XKLW.pdf', link: 'https://www.credly.com/badges/ca698d85-1904-4f73-a471-3689d99f8073/public_url' },
   { name: 'OASIS Certification - Manufacturing of Semiconductor', file: 'OASIS_Certification_Manufacturing of Semiconductor.pdf', link: 'https://www.credly.com/badges/1dddd198-29b4-4809-91c7-1ed475609fc2/public_url' },
 ];
 
