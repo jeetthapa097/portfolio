@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Header from './Header';
 import './App.css';
 import './index.tailwind.css';
@@ -162,6 +162,7 @@ function App() {
   const [contactStatus, setContactStatus] = useState('idle'); // idle | sending | success | error
   const [expandedCards, setExpandedCards] = useState({});
   const projectHoverTimeoutRef = useRef(null);
+  const location = useLocation();
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -169,6 +170,12 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      setTimeout(() => scrollToSection(location.state.scrollTo), 100);
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {

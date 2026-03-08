@@ -1,7 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const handleSectionClick = (section) => {
+    navigate('/', { state: { scrollTo: section } });
+  };
+
   return (
     <header className="site-header">
       <div className="site-logo">
@@ -11,10 +17,10 @@ export default function Header() {
         <Link to="/" className="nav-link">Home</Link>
         <Link to="/resume" className="nav-link">Resume</Link>
         <Link to="/certification" className="nav-link">Certifications</Link>
-        <a href="/#experience" className="nav-link">Experiences</a>
-        <a href="/#projects" className="nav-link">Projects</a>
-        <a href="/#about" className="nav-link">About</a>
-        <a href="/#contact" className="nav-link">Contact</a>
+        <button onClick={() => handleSectionClick('experience')} className="nav-link" style={{border: 'none', background: 'none', cursor: 'pointer', padding: 0}}>Experiences</button>
+        <button onClick={() => handleSectionClick('projects')} className="nav-link" style={{border: 'none', background: 'none', cursor: 'pointer', padding: 0}}>Projects</button>
+        <button onClick={() => handleSectionClick('about')} className="nav-link" style={{border: 'none', background: 'none', cursor: 'pointer', padding: 0}}>About</button>
+        <button onClick={() => handleSectionClick('contact')} className="nav-link" style={{border: 'none', background: 'none', cursor: 'pointer', padding: 0}}>Contact</button>
       </nav>
     </header>
   );
