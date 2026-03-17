@@ -253,7 +253,7 @@ function App() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href={`${process.env.PUBLIC_URL || ''}/Resume_Jeet.pdf`}
+                href={`${process.env.PUBLIC_URL || ''}/Resume_Jeet.pdf?v=${Date.now()}`}
                 download="Jeet_Resume.pdf"
                 className="btn-primary inline-flex items-center gap-2 text-sm md:text-[0.95rem]"
               >
