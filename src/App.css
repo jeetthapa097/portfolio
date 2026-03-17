@@ -1,8 +1,14 @@
 .App {
   min-height: 100vh;
-  background: #f9fafb;
+  background: #DCDCDC;
   color: #111827;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark .App {
+  background: #0f1419;
+  color: #e5e7eb;
 }
 
 html {
@@ -83,6 +89,31 @@ html {
   color: #f9fafb;
 }
 
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #4b5563;
+  transition: background 0.15s ease, color 0.15s ease;
+  margin-left: 0.5rem;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(79, 70, 229, 0.06);
+  color: #111827;
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+}
+
 .hero-section {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
@@ -130,46 +161,83 @@ html {
 
 .experience-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
 .experience-card {
   background: #ffffff;
   border-radius: 1rem;
-  padding: 1.25rem 1.3rem;
+  padding: 1.25rem;
   border: 1px solid #e5e7eb;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  display: grid;
+  grid-template-columns: 200px 1fr 280px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.experience-image-wrapper {
+  width: 100%;
+  height: 200px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.experience-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.experience-content {
   text-align: left;
-}
-
-.experience-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.4rem;
-  font-size: 0.8rem;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.experience-role {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.2rem;
-}
-
-.experience-dates {
-  font-size: 0.8rem;
-  color: #6b7280;
-  margin-bottom: 0.4rem;
 }
 
 .experience-summary {
   font-size: 0.9rem;
   color: #4b5563;
   line-height: 1.6;
+}
+
+.experience-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.experience-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.experience-company {
+  font-weight: 600;
+}
+
+.experience-location {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.experience-role {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.experience-dates {
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 
 .projects-section {
@@ -436,12 +504,56 @@ html {
 }
 
 .site-footer {
+  position: relative;
   border-top: 1px solid #e5e7eb;
   padding: 1.25rem 1.5rem 1.75rem;
-  text-align: center;
   font-size: 0.85rem;
   color: #6b7280;
   margin-top: 3rem;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-social-link {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: color 0.3s ease;
+}
+
+.footer-social-link:hover {
+  color: #0a66c2;
+}
+
+.footer-social-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-email-link {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.footer-email-link:hover {
+  color: #3b82f6;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -469,4 +581,179 @@ html {
   .section {
     padding-inline: 1.25rem;
   }
+
+  .experience-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .experience-image-wrapper {
+    height: 150px;
+  }
+
+  .experience-details {
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+  }
+}
+
+/* Dark Mode Styles */
+html.dark .site-header {
+  background: rgba(15, 20, 25, 0.95);
+  border-bottom-color: rgba(75, 85, 99, 0.3);
+}
+
+html.dark .nav-link {
+  color: #9ca3af;
+}
+
+html.dark .nav-link:hover {
+  background: rgba(79, 70, 229, 0.15);
+  color: #e5e7eb;
+}
+
+html.dark .nav-link-active {
+  background: #e5e7eb;
+  color: #0f1419;
+}
+
+html.dark .theme-toggle-btn {
+  color: #9ca3af;
+}
+
+html.dark .theme-toggle-btn:hover {
+  background: rgba(79, 70, 229, 0.15);
+  color: #e5e7eb;
+}
+
+html.dark .section-title {
+  color: #e5e7eb;
+}
+
+html.dark .experience-card {
+  background: #1a1f26;
+  border-color: rgba(75, 85, 99, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .experience-company {
+  color: #9ca3af;
+}
+
+html.dark .experience-location {
+  color: #6b7280;
+}
+
+html.dark .experience-role {
+  color: #e5e7eb;
+}
+
+html.dark .experience-dates {
+  color: #9ca3af;
+}
+
+html.dark .experience-summary {
+  color: #d1d5db;
+}
+
+html.dark .experience-image-wrapper {
+  background: #0f1419;
+}
+
+html.dark .project-card {
+  background: #1a1f26;
+  border-color: rgba(75, 85, 99, 0.2);
+}
+
+html.dark .project-title {
+  color: #e5e7eb;
+}
+
+html.dark .project-tag {
+  color: #9ca3af;
+}
+
+html.dark .project-modal {
+  background: #1a1f26;
+  border-color: rgba(75, 85, 99, 0.2);
+}
+
+html.dark .project-title-modal {
+  color: #e5e7eb;
+}
+
+html.dark .project-tag-modal {
+  color: #9ca3af;
+}
+
+html.dark .project-description-modal {
+  color: #d1d5db;
+}
+
+html.dark .btn-primary {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+html.dark .btn-primary:hover {
+  background: #4338ca;
+}
+
+html.dark .btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+html.dark .contact-form-field label {
+  color: #e5e7eb;
+}
+
+html.dark .contact-form-field input,
+html.dark .contact-form-field textarea {
+  background: #1a1f26;
+  border-color: rgba(75, 85, 99, 0.2);
+  color: #e5e7eb;
+}
+
+html.dark .contact-form-field input:focus,
+html.dark .contact-form-field textarea:focus {
+  border-color: #4f46e5;
+  background: #1a1f26;
+}
+
+html.dark .contact-text {
+  color: #d1d5db;
+}
+
+html.dark .about-subtitle {
+  color: #e5e7eb;
+}
+
+html.dark .about-list li {
+  color: #d1d5db;
+}
+
+html.dark .site-footer {
+  border-top-color: rgba(75, 85, 99, 0.2);
+  color: #9ca3af;
+}
+
+html.dark .footer-content {
+  color: #9ca3af;
+}
+
+html.dark .footer-social-link {
+  color: #9ca3af;
+}
+
+html.dark .footer-social-link:hover {
+  color: #60a5fa;
+}
+
+html.dark .footer-email-link {
+  color: #9ca3af;
+}
+
+html.dark .footer-email-link:hover {
+  color: #60a5fa;
 }

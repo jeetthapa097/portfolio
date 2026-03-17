@@ -61,6 +61,7 @@ const EXPERIENCES = [
     role: 'Graduate Research Assistant -(Additive Manufacturing, Mechanical & Material Characterization)',
     dates: 'May 2025 – Present',
     summary: 'SLS printed PA12 and PA12-GF across multiple build orientations; performed ASTM D638 tensile, ASTM D695 compression, and ISO 179-1 Charpy impact testing and quantified orientation effects on modulus, yield, and stress–strain response. Verified dimensional accuracy and surface/topography using Mitutoyo Vision System and Keyence VR-6000, and supported simulation correlation in ANSYS/Simufact. Conducted XRD phase identification on PA12 and PA12-GF powder and printed parts to compare crystalline phase changes before vs after printing. Performed SEM fractography on PA12-GF after cryogenic fracture of ASTM D695 cylindrical specimens to evaluate fracture morphology and characterize glass bead morphology/distribution and interfacial features.',
+    image: `${process.env.PUBLIC_URL}/experience1.jpg`,
   },
   {
     company: 'WRIGHT STATE UNIVERSITY',
@@ -68,6 +69,7 @@ const EXPERIENCES = [
     role: 'Graduate Teaching Assistant — Mechanical Vibrations Lab',
     dates: 'Aug 2025 – Dec 2025',
     summary: 'Facilitated SDOF vibration labs using cantilever and forced-response setups; guided students in extracting natural frequency, damping ratio, transmissibility, and frequency response functions (FRF) from experimental data. Conducted and supervised measurements with accelerometers, impact (impulse) hammers, and rotating unbalance excitation, emphasizing proper sensor mounting, signal quality, and repeatability. Connected experimental results to vibration theory through structured analysis, clean data acquisition, and technical reporting.',
+    image: `${process.env.PUBLIC_URL}/experience2.jpg`,
   },
   {
     company: 'WRIGHT STATE UNIVERSITY',
@@ -75,6 +77,7 @@ const EXPERIENCES = [
     role: 'Graduate Teaching Assistant — Material Testing Lab',
     dates: 'Aug 2025 – Dec 2025',
     summary: 'Facilitated SDOF vibration labs using cantilever and forced-response setups; guided students in extracting natural frequency, damping ratio, transmissibility, and frequency response functions (FRF) from experimental data. Conducted and supervised measurements with accelerometers, impact (impulse) hammers, and rotating unbalance excitation, emphasizing proper sensor mounting, signal quality, and repeatability. Connected experimental results to vibration theory through structured analysis, clean data acquisition, and technical reporting.',
+    image: `${process.env.PUBLIC_URL}/experience3.jpg`,
   },
   {
     company: 'Sipradi',
@@ -82,6 +85,7 @@ const EXPERIENCES = [
     role: 'Service Advisor- (Automotive Diagnostics & Service Operations)',
     dates: 'July 2016 - Oct 2018',
     summary: 'Responsible for end-to-end service operations from customer intake to final quality verification, with strong emphasis on fault isolation, root-cause analysis (RCA), and corrective/preventive actions (CAPA). Performed advanced diagnostics using TATA Diagnostics Software by interpreting DTCs, live sensor data, actuator tests, and wiring/circuit checks, improving troubleshooting speed and increasing service turnover by ~20%. Coordinated repair planning, job card documentation, parts ordering, and quality control to improve first-time-fix performance and reduce rework. Implemented Hunter Hawkeye Elite 3D wheel alignment to improve measurement accuracy and steering/handling correction, validating results through road-test verification and structured customer handover.',
+    image: `${process.env.PUBLIC_URL}/experience4.jpg`,
   },
   {
     company: 'B & K ENTERPRISES',
@@ -89,6 +93,7 @@ const EXPERIENCES = [
     role: 'Technical Advisor / Sr. Service Engineer- (SOPs, Failure Analysis, Reporting & Compliance)',
     dates: 'Dec 2018 – Nov 2023',
     summary: 'Implemented advanced service SOPs across multiple vehicle classes, improving workflow efficiency and saving 225+ labor hours/year. Led failure analysis / RCA on hydraulics, clutch, and brake systems, driving preventive actions that reduced repeat failures by ~15%. Managed technical coordination and documentation—warranty/inventory reporting using Microsoft Office and Microsoft Dynamics Navision—and performed emissions compliance inspections using exhaust gas analyzers (petrol) and opacity meters (diesel) to support regulatory readiness.',
+    image: `${process.env.PUBLIC_URL}/experience5.jpg`,
   },
   {
     company: 'CG FOODS NEPAL',
@@ -96,6 +101,7 @@ const EXPERIENCES = [
     role: 'Mechanical Engineering Internship- (Industrial Operation, Maintenance & QA Support)',
     dates: 'Oct 2014 – Nov 2014',
     summary: 'Directly involved in operating and supporting maintenance of production equipment (extruders, boilers, conveyors), including preventive maintenance, welding, lathe machining, and alignment to improve reliability and reduce downtime. Supported quality assurance through equipment calibration checks and verification of material/process consistency to meet plant standards.',
+    image: `${process.env.PUBLIC_URL}/experience6.jpg`,
   },
 ];
 
@@ -264,23 +270,36 @@ function App() {
           <div className="experience-grid">
             {EXPERIENCES.map((exp, index) => {
               const isExpanded = expandedCards[index];
-              const displayText = isExpanded ? exp.summary : exp.summary.slice(0, 150) + '...';
+              const displayText = isExpanded ? exp.summary : exp.summary.slice(0, 100) + '...';
               return (
                 <article key={index} className="experience-card">
-                  <div className="experience-meta">
-                    <span className="experience-company">{exp.company}</span>
-                    <span className="experience-location">{exp.location}</span>
+                  {exp.image && (
+                    <div className="experience-image-wrapper">
+                      <img
+                        src={exp.image}
+                        alt={exp.company}
+                        className="experience-image"
+                      />
+                    </div>
+                  )}
+                  <div className="experience-content">
+                    <p className="experience-summary">{displayText}</p>
+                    <button
+                      type="button"
+                      className="btn-primary text-sm mt-2"
+                      onClick={() => setExpandedCards(prev => ({ ...prev, [index]: !prev[index] }))}
+                    >
+                      {isExpanded ? 'Read Less' : 'Read More'}
+                    </button>
                   </div>
-                  <h3 className="experience-role">{exp.role}</h3>
-                  <p className="experience-dates">{exp.dates}</p>
-                  <p className="experience-summary">{displayText}</p>
-                  <button
-                    type="button"
-                    className="btn-primary text-sm mt-2"
-                    onClick={() => setExpandedCards(prev => ({ ...prev, [index]: !prev[index] }))}
-                  >
-                    {isExpanded ? 'Read Less' : 'Read More'}
-                  </button>
+                  <div className="experience-details">
+                    <div className="experience-meta">
+                      <span className="experience-company">{exp.company}</span>
+                      <span className="experience-location">{exp.location}</span>
+                    </div>
+                    <h3 className="experience-role">{exp.role}</h3>
+                    <p className="experience-dates">{exp.dates}</p>
+                  </div>
                 </article>
               );
             })}
@@ -466,7 +485,32 @@ function App() {
       )}
 
       <footer className="site-footer">
-        <p>Copyright © 2026 Jeet Thapa</p>
+        <div className="footer-content">
+          <a
+            href="https://www.linkedin.com/in/jeet-thapa-82567118b/"
+            className="footer-social-link"
+            aria-label="LinkedIn profile"
+            title="LinkedIn"
+          >
+            <svg
+              className="footer-social-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </a>
+          <p>Copyright © 2026 Jeet Thapa</p>
+          <a
+            href="mailto:jeet.thapa097@gmail.com"
+            className="footer-email-link"
+            aria-label="Email address"
+            title="jeet.thapa097@gmail.com"
+          >
+            jeet.thapa097@gmail.com
+          </a>
+        </div>
       </footer>
     </div>
   );
