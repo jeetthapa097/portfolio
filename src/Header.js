@@ -19,6 +19,7 @@ export default function Header() {
         <Link to="/" className="nav-link">Home</Link>
         <Link to="/resume" className="nav-link">Resume</Link>
         <Link to="/certification" className="nav-link">Certifications</Link>
+        <Link to="/conference" className="nav-link">Conference & Seminar</Link>
         <button onClick={() => handleSectionClick('experience')} className="nav-link" style={{border: 'none', background: 'none', cursor: 'pointer', padding: 0}}>Experiences</button>
         <button onClick={() => handleSectionClick('projects')} className="nav-link" style={{border: 'none', background: 'none', cursor: 'pointer', padding: 0}}>Projects</button>
         <button onClick={() => handleSectionClick('about')} className="nav-link" style={{border: 'none', background: 'none', cursor: 'pointer', padding: 0}}>About</button>

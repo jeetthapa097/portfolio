@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Header from './Header';
+import HeroBackground from './HeroBackground';
 import './App.css';
 import './index.tailwind.css';
 import emailjs from '@emailjs/browser';
@@ -11,17 +12,37 @@ const SECTION_IDS = ['home', 'resume', 'certifications', 'experiences', 'project
 
 const HERO_SLIDES = [
   {
-    title: 'Technical Skill Stack',
-    body: 'SolidWorks for CAD and assemblies, ANSYS for FEA and modal/vibration insight, Simufact for manufacturing simulation, plus hands-on prototyping and performance validation.',
+    icon: '⚙️',
+    title: 'Engineering Software',
+    body: 'SolidWorks for CAD & assemblies · ANSYS for FEA and modal/vibration analysis · Simufact for metal forming simulation · MATLAB for data analysis & automation.',
   },
   {
-    title: 'Mechanical Engineering',
-    body: 'Graduate-level mechanical engineer focused on turning concepts into real hardware—combining CAD, analysis, and test-driven validation with clean engineering documentation',
+    icon: '🔬',
+    title: 'Research & Materials',
+    body: 'SLS additive manufacturing with PA12/PA12-GF · ASTM D638/D695 mechanical testing · XRD phase identification · SEM fractography on cryogenic-fracture specimens.',
   },
   {
-    title: 'Target Roles & Industries',
-    body: 'Seeking roles in Product/Mechanical Design, Test & Validation, and Manufacturing Engineering—especially in automotive, aerospace, consumer hardware, and energy systems.',
+    icon: '🏆',
+    title: 'Excellence in Research Award',
+    body: 'Excellence in Research Poster Presentation Award — Wright State University Research Celebration 2026. Recognized for additive manufacturing & materials characterization research.',
   },
+  {
+    icon: '🚗',
+    title: '7+ Years Industry Experience',
+    body: 'Advanced automotive diagnostics & RCA at TATA Motors dealership · SOPs, failure analysis & compliance engineering on heavy equipment (JCB, Komatsu, dozers).',
+  },
+  {
+    icon: '🎯',
+    title: 'Target Roles',
+    body: 'Product & Mechanical Design · Test & Validation · Manufacturing Engineering · R&D — in automotive, aerospace, consumer hardware, and materials/energy sectors.',
+  },
+];
+
+const STATS = [
+  { value: '7+', label: 'Years Industry Experience', sub: 'Automotive · Heavy Equipment · Manufacturing' },
+  { value: '10+', label: 'Engineering Tools', sub: 'SolidWorks · ANSYS · MATLAB · Simufact · more' },
+  { value: '3', label: 'Conference Presentations', sub: 'PINO 2026 · MS&T 2025 · DESS 2025' },
+  { value: '🏆', label: 'Research Excellence Award', sub: 'WSU Celebration of Research 2026' },
 ];
 
 const PROJECTS = [
@@ -58,50 +79,68 @@ const EXPERIENCES = [
   {
     company: 'WRIGHT STATE UNIVERSITY',
     location: 'Dayton, OH, USA',
-    role: 'Graduate Research Assistant -(Additive Manufacturing, Mechanical & Material Characterization)',
+    role: 'Graduate Research Assistant — Additive Manufacturing, Mechanical & Material Characterization',
+    shortRole: 'Graduate Research Assistant · Additive Manufacturing',
     dates: 'May 2025 – Present',
     summary: 'SLS printed PA12 and PA12-GF across multiple build orientations; performed ASTM D638 tensile, ASTM D695 compression, and ISO 179-1 Charpy impact testing and quantified orientation effects on modulus, yield, and stress–strain response. Verified dimensional accuracy and surface/topography using Mitutoyo Vision System and Keyence VR-6000, and supported simulation correlation in ANSYS/Simufact. Conducted XRD phase identification on PA12 and PA12-GF powder and printed parts to compare crystalline phase changes before vs after printing. Performed SEM fractography on PA12-GF after cryogenic fracture of ASTM D695 cylindrical specimens to evaluate fracture morphology and characterize glass bead morphology/distribution and interfacial features.',
-    image: `${process.env.PUBLIC_URL}/experience1.jpg`,
+    logo: `${process.env.PUBLIC_URL}/conference_wsu.png`,
+    bgImage: `${process.env.PUBLIC_URL}/experience_wsu.jpg`,
+    bgColor: '#00543C',
   },
   {
     company: 'WRIGHT STATE UNIVERSITY',
     location: 'Dayton, OH, USA',
     role: 'Graduate Teaching Assistant — Mechanical Vibrations Lab',
+    shortRole: 'Graduate Teaching Assistant · Vibrations Lab',
     dates: 'Aug 2025 – Dec 2025',
     summary: 'Facilitated SDOF vibration labs using cantilever and forced-response setups; guided students in extracting natural frequency, damping ratio, transmissibility, and frequency response functions (FRF) from experimental data. Conducted and supervised measurements with accelerometers, impact (impulse) hammers, and rotating unbalance excitation, emphasizing proper sensor mounting, signal quality, and repeatability. Connected experimental results to vibration theory through structured analysis, clean data acquisition, and technical reporting.',
-    image: `${process.env.PUBLIC_URL}/experience2.jpg`,
+    logo: `${process.env.PUBLIC_URL}/conference_wsu.png`,
+    bgImage: `${process.env.PUBLIC_URL}/experience_wsu.jpg`,
+    bgColor: '#00543C',
   },
   {
     company: 'WRIGHT STATE UNIVERSITY',
     location: 'Dayton, OH, USA',
     role: 'Graduate Teaching Assistant — Material Testing Lab',
+    shortRole: 'Graduate Teaching Assistant · Materials Testing Lab',
     dates: 'Aug 2025 – Dec 2025',
     summary: 'Facilitated SDOF vibration labs using cantilever and forced-response setups; guided students in extracting natural frequency, damping ratio, transmissibility, and frequency response functions (FRF) from experimental data. Conducted and supervised measurements with accelerometers, impact (impulse) hammers, and rotating unbalance excitation, emphasizing proper sensor mounting, signal quality, and repeatability. Connected experimental results to vibration theory through structured analysis, clean data acquisition, and technical reporting.',
-    image: `${process.env.PUBLIC_URL}/experience3.jpg`,
+    logo: `${process.env.PUBLIC_URL}/conference_wsu.png`,
+    bgImage: `${process.env.PUBLIC_URL}/experience_wsu.jpg`,
+    bgColor: '#00543C',
   },
   {
-    company: 'Sipradi',
+    company: 'SIPRADI',
     location: 'Kathmandu, Nepal',
-    role: 'Service Advisor- (Automotive Diagnostics & Service Operations)',
-    dates: 'July 2016 - Oct 2018',
+    role: 'Service Advisor — Automotive Diagnostics & Service Operations',
+    shortRole: 'Service Advisor · Automotive Diagnostics',
+    dates: 'July 2016 – Oct 2018',
     summary: 'Responsible for end-to-end service operations from customer intake to final quality verification, with strong emphasis on fault isolation, root-cause analysis (RCA), and corrective/preventive actions (CAPA). Performed advanced diagnostics using TATA Diagnostics Software by interpreting DTCs, live sensor data, actuator tests, and wiring/circuit checks, improving troubleshooting speed and increasing service turnover by ~20%. Coordinated repair planning, job card documentation, parts ordering, and quality control to improve first-time-fix performance and reduce rework. Implemented Hunter Hawkeye Elite 3D wheel alignment to improve measurement accuracy and steering/handling correction, validating results through road-test verification and structured customer handover.',
-    image: `${process.env.PUBLIC_URL}/experience4.jpg`,
+    logo: `${process.env.PUBLIC_URL}/exp_logo_sipradi_white.svg`,
+    bgImage: `${process.env.PUBLIC_URL}/experience_sipradi.jpg`,
+    bgColor: '#0a1e3d',
   },
   {
     company: 'B & K ENTERPRISES',
     location: 'Nepal',
-    role: 'Technical Advisor / Sr. Service Engineer- (SOPs, Failure Analysis, Reporting & Compliance)',
+    role: 'Technical Advisor / Sr. Service Engineer — SOPs, Failure Analysis, Reporting & Compliance',
+    shortRole: 'Sr. Service Engineer · Heavy Equipment',
     dates: 'Dec 2018 – Nov 2023',
     summary: 'Implemented advanced service SOPs across multiple vehicle classes, improving workflow efficiency and saving 225+ labor hours/year. Led failure analysis / RCA on hydraulics, clutch, and brake systems, driving preventive actions that reduced repeat failures by ~15%. Managed technical coordination and documentation—warranty/inventory reporting using Microsoft Office and Microsoft Dynamics Navision—and performed emissions compliance inspections using exhaust gas analyzers (petrol) and opacity meters (diesel) to support regulatory readiness.',
-    image: `${process.env.PUBLIC_URL}/experience5.jpg`,
+    logo: null,
+    bgImage: `${process.env.PUBLIC_URL}/experience_bk.jpg`,
+    bgColor: '#111827',
   },
   {
     company: 'CG FOODS NEPAL',
     location: 'Nepal',
-    role: 'Mechanical Engineering Internship- (Industrial Operation, Maintenance & QA Support)',
+    role: 'Mechanical Engineering Intern — Industrial Operations, Maintenance & QA Support',
+    shortRole: 'Engineering Intern · Industrial Operations',
     dates: 'Oct 2014 – Nov 2014',
     summary: 'Directly involved in operating and supporting maintenance of production equipment (extruders, boilers, conveyors), including preventive maintenance, welding, lathe machining, and alignment to improve reliability and reduce downtime. Supported quality assurance through equipment calibration checks and verification of material/process consistency to meet plant standards.',
-    image: `${process.env.PUBLIC_URL}/experience6.jpg`,
+    logo: `${process.env.PUBLIC_URL}/exp_logo_cgfoods.svg`,
+    bgImage: `${process.env.PUBLIC_URL}/experience_cgfoods.jpg`,
+    bgColor: '#1a0a0a',
   },
 ];
 
@@ -109,52 +148,37 @@ function HeroCarousel() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 5000);
-
-    return () => clearInterval(intervalId);
+    const id = setInterval(() => setIndex(prev => (prev + 1) % HERO_SLIDES.length), 3000);
+    return () => clearInterval(id);
   }, []);
 
   return (
-    <div
-      id="hero-carousel"
-      className="relative w-full max-w-xl ml-auto h-full"
-      data-carousel="slide"
-    >
-      <div className="relative h-full overflow-hidden rounded-2xl">
+    <div className="hero-carousel-wrapper">
+      <div className="hero-carousel-track">
         {HERO_SLIDES.map((slide, i) => (
           <div
             key={slide.title}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              i === index ? 'opacity-100' : 'opacity-0'
-            }`}
+            className="hero-carousel-slide"
+            style={{ opacity: i === index ? 1 : 0, pointerEvents: i === index ? 'auto' : 'none' }}
           >
-            <div className="flex h-full flex-col justify-center bg-slate-800/90 px-8 py-6 md:py-8">
-              <h2 className="mb-3 text-xl md:text-2xl font-semibold text-white">
-                {slide.title}
-              </h2>
-              <p className="text-sm md:text-[0.95rem] text-slate-200/90 leading-relaxed">
-                {slide.body}
-              </p>
-            </div>
+            <div className="hero-slide-icon">{slide.icon}</div>
+            <h2 className="hero-slide-title">{slide.title}</h2>
+            <p className="hero-slide-body">{slide.body}</p>
           </div>
         ))}
       </div>
-
-      <div className="absolute z-30 flex -translate-x-1/2 space-x-2 bottom-3 left-1/2">
+      {/* Progress bar */}
+      <div className="hero-carousel-progress">
         {HERO_SLIDES.map((_, i) => (
           <button
             key={String(i)}
             type="button"
-            className="h-2.5 w-2.5 rounded-full border border-white/60 bg-white/40 hover:bg-white"
-            aria-label={`Go to slide ${i + 1}`}
-            aria-current={i === index}
+            className={`hero-carousel-dot ${i === index ? 'active' : ''}`}
+            aria-label={`Slide ${i + 1}`}
             onClick={() => setIndex(i)}
           />
         ))}
       </div>
-
     </div>
   );
 }
@@ -162,12 +186,13 @@ function HeroCarousel() {
 function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [activeProject, setActiveProject] = useState(null);
+  const [activeExperience, setActiveExperience] = useState(null);
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [contactMessage, setContactMessage] = useState('');
   const [contactStatus, setContactStatus] = useState('idle'); // idle | sending | success | error
-  const [expandedCards, setExpandedCards] = useState({});
   const projectHoverTimeoutRef = useRef(null);
+  const expHoverTimeoutRef = useRef(null);
   const location = useLocation();
 
   const scrollToSection = (sectionId) => {
@@ -243,14 +268,20 @@ function App() {
       <main>
         <section
           id="home"
-          className="section hero-section bg-zinc-500 text-slate-50 rounded-b-[2.5rem] md:rounded-b-[3rem]"
+          className="section hero-section text-slate-50 rounded-b-[2.5rem] md:rounded-b-[3rem]"
+          style={{ position: 'relative', overflow: 'hidden', background: '#0d1b2a' }}
         >
-          <div className="hero-content space-y-4">
+          <HeroBackground />
+          <div className="hero-content space-y-4" style={{ position: 'relative', zIndex: 1 }}>
             <p className="hero-kicker">Mechanical Engineering Portfolio</p>
-            <h1 className="hero-title text-white">Jeet thapa</h1>
+            <h1 className="hero-title text-white">Jeet Thapa</h1>
             <p className="hero-subtitle text-slate-200/95">
               Mechanical Engineer experienced in engineering softwares (SolidWorks, ANSYS & MATLAB), automotive (almost 7 years), 3D-printing along with mechanical & material characterization, and experimental workflows, bringing an R&D-minded approach to design, analysis, and performance verification.
             </p>
+            <div className="hero-availability">
+              <span className="availability-dot" />
+              <span>Open to Relocation &nbsp;·&nbsp; Remote, Hybrid, or On-site</span>
+            </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={`${process.env.PUBLIC_URL || ''}/Resume_Jeet.pdf?v=${Date.now()}`}
@@ -261,49 +292,62 @@ function App() {
               </a>
             </div>
           </div>
-          <HeroCarousel />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <HeroCarousel />
+          </div>
+        </section>
+
+        {/* ── Stats / At-a-Glance ── */}
+        <section className="stats-section">
+          <div className="stats-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/experience_wsu.jpg)` }} />
+          <div className="stats-overlay" />
+          <div className="stats-inner">
+            <p className="stats-eyebrow">AT A GLANCE</p>
+            <h2 className="stats-heading">Career Highlights</h2>
+            <div className="stats-grid">
+              {STATS.map(stat => (
+                <div key={stat.label} className="stat-card">
+                  <span className="stat-value">{stat.value}</span>
+                  <span className="stat-label">{stat.label}</span>
+                  <span className="stat-sub">{stat.sub}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section id="experience" className="section experience-section">
           <div className="section-container">
-          <h2 className="section-title">Experience</h2>
-          <div className="experience-grid">
-            {EXPERIENCES.map((exp, index) => {
-              const isExpanded = expandedCards[index];
-              const displayText = isExpanded ? exp.summary : exp.summary.slice(0, 100) + '...';
-              return (
-                <article key={index} className="experience-card">
-                  {exp.image && (
-                    <div className="experience-image-wrapper">
-                      <img
-                        src={exp.image}
-                        alt={exp.company}
-                        className="experience-image"
-                      />
-                    </div>
-                  )}
-                  <div className="experience-content">
-                    <p className="experience-summary">{displayText}</p>
-                    <button
-                      type="button"
-                      className="btn-primary text-sm mt-2"
-                      onClick={() => setExpandedCards(prev => ({ ...prev, [index]: !prev[index] }))}
-                    >
-                      {isExpanded ? 'Read Less' : 'Read More'}
-                    </button>
+            <h2 className="section-title">Experience</h2>
+            <div className="exp-grid">
+              {EXPERIENCES.map((exp, index) => (
+                <article
+                  key={index}
+                  className="project-card exp-card"
+                  onMouseEnter={() => {
+                    if (expHoverTimeoutRef.current) clearTimeout(expHoverTimeoutRef.current);
+                    expHoverTimeoutRef.current = setTimeout(() => setActiveExperience(exp), 1000);
+                  }}
+                  onMouseLeave={() => {
+                    if (expHoverTimeoutRef.current) { clearTimeout(expHoverTimeoutRef.current); expHoverTimeoutRef.current = null; }
+                  }}
+                  onClick={() => {
+                    if (expHoverTimeoutRef.current) { clearTimeout(expHoverTimeoutRef.current); expHoverTimeoutRef.current = null; }
+                    setActiveExperience(exp);
+                  }}
+                >
+                  <div className="exp-card-top" style={{ backgroundColor: exp.bgColor }}>
+                    <div className="exp-card-watermark" style={{ backgroundImage: `url(${exp.bgImage})` }} />
+                    {exp.logo
+                      ? <img src={exp.logo} alt={exp.company} className="exp-card-logo" />
+                      : <span className="exp-card-initials">B&amp;K</span>
+                    }
                   </div>
-                  <div className="experience-details">
-                    <div className="experience-meta">
-                      <span className="experience-company">{exp.company}</span>
-                      <span className="experience-location">{exp.location}</span>
-                    </div>
-                    <h3 className="experience-role">{exp.role}</h3>
-                    <p className="experience-dates">{exp.dates}</p>
-                  </div>
+                  <h3 className="project-title">{exp.company}</h3>
+                  <p className="project-tag">{exp.shortRole}</p>
                 </article>
-              );
-            })}
-          </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -359,24 +403,79 @@ function App() {
           <div className="section-container">
           <h2 className="section-title">About</h2>
           <div className="about-grid grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            <div className="md:col-span-6 flex justify-center">
-              <div className="w-full h-full rounded-lg overflow-hidden">
+            <div className="md:col-span-5 flex flex-col gap-5">
+              <div className="about-photo-wrapper">
                 <img
-                  src={process.env.PUBLIC_URL + '/pi.jpeg'}
-                  alt="Profile"
-                  className="w-full h-full object-contain"
+                  src={process.env.PUBLIC_URL + '/pi.jpg'}
+                  alt="Jeet Thapa — Mechanical Engineer"
+                  className="about-photo"
                 />
+              </div>
+              <div className="about-skills-card">
+                <h4 className="about-skills-heading">Technical Skills</h4>
+                <div className="about-skills-groups">
+                  {[
+                    { cat: '⚙️ CAD & Simulation', tags: ['SolidWorks', 'ANSYS FEA', 'Simufact', 'MATLAB'] },
+                    { cat: '🔬 Materials & Testing', tags: ['ASTM D638/D695', 'XRD Analysis', 'SEM Fractography', 'Charpy Impact'] },
+                    { cat: '🖨️ Manufacturing', tags: ['SLS 3D Printing', 'PA12/PA12-GF', 'CNC / Lathe', 'Welding'] },
+                    { cat: '🔧 Engineering Practice', tags: ['Root Cause Analysis', 'GD&T', 'FMEA / SOPs', 'Technical Reporting'] },
+                  ].map(group => (
+                    <div key={group.cat} className="about-skill-group">
+                      <span className="about-skill-cat">{group.cat}</span>
+                      <div className="about-skill-tags">
+                        {group.tags.map(t => <span key={t} className="skill-badge">{t}</span>)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="md:col-span-6 flex justify-center">
-              <div className="w-full h-full rounded-lg overflow-hidden p-6">
+            <div className="md:col-span-7 flex flex-col gap-5">
+              <div className="w-full rounded-lg overflow-hidden p-6">
                 <h3 className="about-subtitle">Background</h3>
                 <ul className="about-list">
                   <li>I am a graduate-level Mechanical Engineer who works at the intersection of mechanical design, simulation, testing, and materials characterization, turning concepts into validated engineering outcomes. Strengths include building clean CAD models in SolidWorks, supporting decisions with ANSYS FEA (structural and modal/vibration insight), and using Simufact to study forming behavior, friction effects, and process-driven deformation trends.</li>
                   <li>Graduate research experience at Wright State University includes mechanical characterization of SLS-printed PA12 and PA12-GF using standards-based testing such as ASTM D638 and ASTM D695, and translating stress–strain response into meaningful performance conclusions. Materials characterization experience includes XRD phase identification to compare crystalline phase changes in PA12 powder versus printed parts, and SEM fractography of PA12-GF after cryogenic fracture of ASTM D695 cylindrical specimens to evaluate fracture morphology and glass-bead microstructure.</li>
                   <li>Prior automotive service engineering experience added a reliability-focused mindset through diagnostics, root-cause analysis (RCA), SOP implementation, technical reporting, and compliance inspection, strengthening the ability to troubleshoot complex systems and communicate clearly across teams. Interests span product development, test and validation, manufacturing and process engineering, structural and vibration analysis, and R&D-driven problem solving, where decisions are backed by analysis and real data.</li>
                 </ul>
+              </div>
+
+              {/* ── What I'm Looking For ── */}
+              <div className="about-looking-for">
+                <h3 className="about-lf-heading">
+                  <span className="about-lf-heading-icon">🎯</span> What I'm Looking For
+                </h3>
+                <div className="about-lf-grid">
+                  <div className="about-lf-item">
+                    <span className="about-lf-icon">🔩</span>
+                    <div>
+                      <span className="about-lf-title">Target Roles</span>
+                      <span className="about-lf-desc">Product &amp; Mechanical Design · Test &amp; Validation · Manufacturing Engineering · R&amp;D</span>
+                    </div>
+                  </div>
+                  <div className="about-lf-item">
+                    <span className="about-lf-icon">🏭</span>
+                    <div>
+                      <span className="about-lf-title">Industries</span>
+                      <span className="about-lf-desc">Automotive · Aerospace · Consumer Hardware · Materials &amp; Energy · Defense</span>
+                    </div>
+                  </div>
+                  <div className="about-lf-item">
+                    <span className="about-lf-icon">⚡</span>
+                    <div>
+                      <span className="about-lf-title">Approach</span>
+                      <span className="about-lf-desc">Data-driven decisions backed by analysis, simulation, and real experimental evidence</span>
+                    </div>
+                  </div>
+                  <div className="about-lf-item">
+                    <span className="about-lf-icon">🌐</span>
+                    <div>
+                      <span className="about-lf-title">Authorization</span>
+                      <span className="about-lf-desc">F-1 OPT eligible · Open to sponsorship · Dayton, OH — open to relocation</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -387,6 +486,9 @@ function App() {
         <section id="contact" className="section contact-section">
           <div className="section-container">
           <h2 className="section-title">Contact</h2>
+          <div className="contact-layout">
+          {/* ── Left: form ── */}
+          <div className="contact-form-col">
           <p className="contact-text">
             For opportunities, collaborations, or questions, feel free to reach out.
           </p>
@@ -444,9 +546,89 @@ function App() {
               </p>
             )}
           </form>
+          </div>{/* end contact-form-col */}
+
+          {/* ── Right: info panel ── */}
+          <div className="contact-info-panel">
+            <h3 className="contact-info-heading">Let's Connect</h3>
+            <p className="contact-info-sub">I respond within 24 hours. Whether it's a full-time role, research collaboration, or a quick question — feel free to reach out directly.</p>
+
+            <div className="contact-info-items">
+              <a href="mailto:jeet.thapa096@gmail.com" className="contact-info-item">
+                <span className="contact-info-item-icon">✉️</span>
+                <div>
+                  <span className="contact-info-item-label">Email</span>
+                  <span className="contact-info-item-value">jeet.thapa096@gmail.com</span>
+                </div>
+              </a>
+              <a href="https://www.linkedin.com/in/jeet-thapa-82567118b/" target="_blank" rel="noopener noreferrer" className="contact-info-item">
+                <span className="contact-info-item-icon">💼</span>
+                <div>
+                  <span className="contact-info-item-label">LinkedIn</span>
+                  <span className="contact-info-item-value">linkedin.com/in/jeet-thapa</span>
+                </div>
+              </a>
+              <div className="contact-info-item">
+                <span className="contact-info-item-icon">📍</span>
+                <div>
+                  <span className="contact-info-item-label">Location</span>
+                  <span className="contact-info-item-value">Dayton, OH, USA</span>
+                </div>
+              </div>
+              <div className="contact-info-item">
+                <span className="contact-info-item-icon">🎓</span>
+                <div>
+                  <span className="contact-info-item-label">Current Status</span>
+                  <span className="contact-info-item-value">Graduate Research &amp; Teaching Assistant — Wright State University</span>
+                </div>
+              </div>
+              <div className="contact-info-item">
+                <span className="contact-info-item-icon">🏢</span>
+                <div>
+                  <span className="contact-info-item-label">Work Authorization</span>
+                  <span className="contact-info-item-value">F-1 OPT eligible · Open to sponsorship discussions</span>
+                </div>
+              </div>
+            </div>
+          </div>{/* end contact-info-panel */}
+
+          </div>{/* end contact-layout */}
           </div>
         </section>
       </main>
+
+      {activeExperience && (
+        <div
+          className="project-modal-backdrop"
+          onClick={() => setActiveExperience(null)}
+          role="presentation"
+        >
+          <div
+            className="project-modal exp-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            <button
+              type="button"
+              className="project-modal-close"
+              onClick={() => setActiveExperience(null)}
+              aria-label="Close experience details"
+            >×</button>
+            <div className="exp-modal-top" style={{ backgroundColor: activeExperience.bgColor }}>
+              <div className="exp-card-watermark" style={{ backgroundImage: `url(${activeExperience.bgImage})` }} />
+              {activeExperience.logo
+                ? <img src={activeExperience.logo} alt={activeExperience.company} className="exp-modal-logo" />
+                : <span className="exp-card-initials exp-modal-initials">B&amp;K</span>
+              }
+            </div>
+            <p className="project-tag project-tag-modal">{activeExperience.company} · {activeExperience.location}</p>
+            <h3 className="project-title project-title-modal">{activeExperience.role}</h3>
+            <p className="exp-modal-dates">{activeExperience.dates}</p>
+            <p className="project-description-modal">{activeExperience.summary}</p>
+          </div>
+        </div>
+      )}
 
       {activeProject && (
         <div

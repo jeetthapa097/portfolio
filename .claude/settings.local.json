@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.pinoconference.org)",
+      "WebFetch(domain:www.matscitech.org)",
+      "WebFetch(domain:www.asmedayton.org)",
+      "WebFetch(domain:www.wright.edu)",
+      "Read(//c/Users/jeett/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/8377cbeb-9bdc-413f-aa64-4eba6b35b929/be020e14-cda0-423d-8193-71abf5abfc00/skills/pptx/**)",
+      "Bash(python -m markitdown \"G:/My Drive/Conference/conference/PINO Poster 2_18.pptx\")",
+      "Bash(python3 -m markitdown \"G:/My Drive/Conference/conference/PINO Poster 2_18.pptx\")",
+      "Bash(py --version)",
+      "Bash(py -3 -m markitdown \"G:/My Drive/Conference/conference/PINO Poster 2_18.pptx\")",
+      "Bash(py -3 -m pip install \"markitdown[pptx]\")",
+      "Bash(py -3 -m markitdown \"G:/My Drive/Conference/conference/Research Celebration.pptx\")",
+      "Bash(py -3 -c \":*)"
+    ]
+  }
+}
