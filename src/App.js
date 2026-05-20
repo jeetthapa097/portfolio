@@ -441,40 +441,28 @@ function App() {
                 </ul>
               </div>
 
-              {/* ── What I'm Looking For ── */}
-              <div className="about-looking-for">
-                <h3 className="about-lf-heading">
-                  <span className="about-lf-heading-icon">🎯</span> What I'm Looking For
-                </h3>
-                <div className="about-lf-grid">
-                  <div className="about-lf-item">
-                    <span className="about-lf-icon">🔩</span>
+              {/* ── Quick Info / Education ── */}
+              <div className="about-quick-info">
+                <div className="about-info-row">
+                  <div className="about-info-item">
+                    <span className="about-info-icon">🎓</span>
                     <div>
-                      <span className="about-lf-title">Target Roles</span>
-                      <span className="about-lf-desc">Product &amp; Mechanical Design · Test &amp; Validation · Manufacturing Engineering · R&amp;D</span>
+                      <span className="about-info-label">Education</span>
+                      <span className="about-info-value">M.S. Mechanical Engineering — Wright State University <em>(In Progress)</em></span>
+                      <span className="about-info-value">B.E. Mechanical Engineering — Kathmandu University</span>
                     </div>
                   </div>
-                  <div className="about-lf-item">
-                    <span className="about-lf-icon">🏭</span>
+                  <div className="about-info-item">
+                    <span className="about-info-icon">📍</span>
                     <div>
-                      <span className="about-lf-title">Industries</span>
-                      <span className="about-lf-desc">Automotive · Aerospace · Consumer Hardware · Materials &amp; Energy · Defense</span>
+                      <span className="about-info-label">Location</span>
+                      <span className="about-info-value">Dayton, OH, USA</span>
                     </div>
                   </div>
-                  <div className="about-lf-item">
-                    <span className="about-lf-icon">⚡</span>
-                    <div>
-                      <span className="about-lf-title">Approach</span>
-                      <span className="about-lf-desc">Data-driven decisions backed by analysis, simulation, and real experimental evidence</span>
-                    </div>
-                  </div>
-                  <div className="about-lf-item">
-                    <span className="about-lf-icon">🌐</span>
-                    <div>
-                      <span className="about-lf-title">Authorization</span>
-                      <span className="about-lf-desc">F-1 OPT eligible · Open to sponsorship · Dayton, OH — open to relocation</span>
-                    </div>
-                  </div>
+                </div>
+                <div className="about-info-availability">
+                  <span className="availability-dot" />
+                  <span>Open to Relocation &nbsp;·&nbsp; Flexible: Remote, Hybrid, or On-site</span>
                 </div>
               </div>
             </div>
@@ -550,6 +538,11 @@ function App() {
 
           {/* ── Right: info panel ── */}
           <div className="contact-info-panel">
+            <div className="contact-info-availability">
+              <span className="availability-dot" />
+              <span>Open to Relocation · Remote, Hybrid, or On-site</span>
+            </div>
+
             <h3 className="contact-info-heading">Let's Connect</h3>
             <p className="contact-info-sub">I respond within 24 hours. Whether it's a full-time role, research collaboration, or a quick question — feel free to reach out directly.</p>
 
@@ -558,7 +551,7 @@ function App() {
                 <span className="contact-info-item-icon">✉️</span>
                 <div>
                   <span className="contact-info-item-label">Email</span>
-                  <span className="contact-info-item-value">jeet.thapa096@gmail.com</span>
+                  <span className="contact-info-item-value">jeet.thapa097@gmail.com</span>
                 </div>
               </a>
               <a href="https://www.linkedin.com/in/jeet-thapa-82567118b/" target="_blank" rel="noopener noreferrer" className="contact-info-item">
@@ -586,7 +579,7 @@ function App() {
                 <span className="contact-info-item-icon">🏢</span>
                 <div>
                   <span className="contact-info-item-label">Work Authorization</span>
-                  <span className="contact-info-item-value">F-1 OPT eligible · Open to sponsorship discussions</span>
+                  <span className="contact-info-item-value">F-1 OPT eligible.</span>
                 </div>
               </div>
             </div>

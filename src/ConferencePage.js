@@ -20,7 +20,7 @@ const CONFERENCES = [
       'Presented at MS&T 2025 (Sep 28–Oct 1, Columbus, OH), this study characterizes how environmental exposure degrades the mechanical integrity of SLS-printed PA12-GF composites across four distinct build orientations. Moisture was confirmed as the dominant degradation mechanism, inducing up to a 36% loss in stiffness and a 25% reduction in yield strength — effects that heat treatment and glass fiber reinforcement could not offset. These findings directly inform durability standards for additively manufactured structural polymer components in service environments.',
   },
   {
-    name: 'Dayton Engineering Sciences Symposium 2025',
+    name: 'Dayton Engineering Sciences Symposium 2026',
     tag: 'ASME Dayton Section · DESS',
     link: 'https://www.asmedayton.org/DESS/DESS.php',
     image: `${process.env.PUBLIC_URL}/conference_dess.jpg`,
@@ -29,13 +29,12 @@ const CONFERENCES = [
   },
   {
     name: 'Research Celebration Event 2026',
-    tag: '🏆 Excellence in Research Poster Presentation Award — Wright State University',
+    tag: 'WSU Celebration of Research, Scholarship & Creative Activities',
     link: 'https://www.wright.edu/events/wsu-celebration-of-research-scholarship-and-creative-activities',
     image: null,
     wsuCard: true,
-    award: true,
     description:
-      '🏆 Excellence in Research Poster Presentation Award — Awarded by the Office of Research and Sponsored Programs, Wright State University, in recognition of outstanding scholarship in designing and presenting a research poster.\n\nThis poster reveals a counterintuitive paradox in glass-fiber-reinforced SLS composites: while PA12-GF achieves 18–20% greater compressive stiffness than pure PA12, its yield stress is consistently lower — unbonded glass bead interfaces act as compressive stress concentrators, a behavior fundamentally distinct from tensile loading. Strain-rate hardening was confirmed across all 7 build orientations, with yield stress increasing up to 175% from quasi-static to dynamic loading in pure PA12 diagonal builds. Microstructural analysis via XRD and SEM linked a full α-to-γ crystallographic phase transformation during SLS processing to the improved mechanical baseline of printed parts.',
+      'Presented at Wright State\'s Research Celebration, this work reveals a counterintuitive paradox in glass-fiber-reinforced SLS composites: while PA12-GF achieves 18–20% greater compressive stiffness than pure PA12, its yield stress is consistently lower — unbonded glass bead interfaces act as compressive stress concentrators, a behavior fundamentally distinct from tensile loading. Strain-rate hardening was confirmed across all 7 build orientations, with yield stress increasing up to 175% from quasi-static to dynamic loading in pure PA12 diagonal builds. Microstructural analysis via XRD and SEM linked a full α-to-γ crystallographic phase transformation during SLS processing to the improved mechanical baseline of printed parts.',
   },
 ];
 
@@ -94,11 +93,7 @@ export default function ConferencePage() {
                     )}
                   </div>
                   <h3 className="project-title">{conf.name}</h3>
-                  {conf.award ? (
-                    <p className="project-tag" style={{ color: '#f5c518', fontWeight: 700, fontSize: '0.72rem' }}>{conf.tag}</p>
-                  ) : (
-                    <p className="project-tag">{conf.tag}</p>
-                  )}
+                  <p className="project-tag">{conf.tag}</p>
                 </article>
               ))}
             </div>
@@ -145,29 +140,9 @@ export default function ConferencePage() {
               </div>
             ) : null}
 
-            {activeConference.award ? (
-              <p style={{ color: '#f5c518', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>
-                {activeConference.tag}
-              </p>
-            ) : (
-              <p className="project-tag project-tag-modal">{activeConference.tag}</p>
-            )}
+            <p className="project-tag project-tag-modal">{activeConference.tag}</p>
             <h3 className="project-title project-title-modal">{activeConference.name}</h3>
-            {activeConference.award ? (
-              <div className="project-description-modal">
-                <p style={{ background: 'linear-gradient(90deg,#b8860b,#f5c518,#b8860b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 700, fontSize: '1rem', marginBottom: '0.75rem', lineHeight: 1.4 }}>
-                  🏆 Excellence in Research Poster Presentation Award
-                </p>
-                <p style={{ color: '#cbd5e1', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-                  Awarded by the Office of Research and Sponsored Programs, Wright State University — in recognition of outstanding scholarship in designing and presenting a research poster.
-                </p>
-                <p style={{ marginTop: '0.75rem' }}>
-                  This poster reveals a counterintuitive paradox in glass-fiber-reinforced SLS composites: while PA12-GF achieves 18–20% greater compressive stiffness than pure PA12, its yield stress is consistently lower — unbonded glass bead interfaces act as compressive stress concentrators, a behavior fundamentally distinct from tensile loading. Strain-rate hardening was confirmed across all 7 build orientations, with yield stress increasing up to 175% from quasi-static to dynamic loading in pure PA12 diagonal builds. Microstructural analysis via XRD and SEM linked a full α-to-γ crystallographic phase transformation during SLS processing to the improved mechanical baseline of printed parts.
-                </p>
-              </div>
-            ) : (
-              <p className="project-description-modal">{activeConference.description}</p>
-            )}
+            <p className="project-description-modal">{activeConference.description}</p>
 
             <a
               href={activeConference.link}
