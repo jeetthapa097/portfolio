@@ -579,7 +579,7 @@ function App() {
                 <span className="contact-info-item-icon">🏢</span>
                 <div>
                   <span className="contact-info-item-label">Visa Status</span>
-                  <span className="contact-info-item-value">F-1 OPT.</span>
+                  <span className="contact-info-item-value">F-1 OPT eligible.</span>
                 </div>
               </div>
             </div>
@@ -609,7 +609,7 @@ function App() {
               aria-label="Close experience details"
             >×</button>
             <div className="exp-modal-top" style={{ backgroundColor: activeExperience.bgColor }}>
-              <div className="exp-card-watermark"style={{ backgroundImage: `url(${activeExperience.bgImage})` }} />
+              <div className="exp-card-watermark" style={{ backgroundImage: `url(${activeExperience.bgImage})` }} />
               {activeExperience.logo
                 ? <img src={activeExperience.logo} alt={activeExperience.company} className="exp-modal-logo" />
                 : <span className="exp-card-initials exp-modal-initials">B&amp;K</span>
