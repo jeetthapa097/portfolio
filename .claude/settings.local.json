@@ -12,7 +12,9 @@
       "Bash(py -3 -m markitdown \"G:/My Drive/Conference/conference/PINO Poster 2_18.pptx\")",
       "Bash(py -3 -m pip install \"markitdown[pptx]\")",
       "Bash(py -3 -m markitdown \"G:/My Drive/Conference/conference/Research Celebration.pptx\")",
-      "Bash(py -3 -c \":*)"
+      "Bash(py -3 -c \":*)",
+      "Bash(npm run:*)",
+      "Bash(grep \"\\\\.m$\")"
     ]
   }
 }
